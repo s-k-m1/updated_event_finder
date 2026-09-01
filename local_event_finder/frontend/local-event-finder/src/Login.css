@@ -8,52 +8,6 @@
   overflow-x: hidden;
 }
 
-@media (max-width: 900px) {
-  .login-page {
-    grid-template-columns: 1fr;
-  }
-  .login-left { padding: 40px 20px; }
-  .login-right { padding: 30px 20px; }
-  .login-right .form-container { width: 100%; max-width: 100%; }
-  .login-left .left-title { font-size: 36px; }
-  .login-left .left-desc { font-size: 13px; max-width: 100%; }
-}
-
-@media (max-width: 600px) {
-  .login-page { height: auto; }
-  .login-left { padding: 30px 16px; }
-  .login-left .brand { margin-bottom: 30px; }
-  .login-left .brand-icon { padding: 8px; }
-  .login-left .left-title { font-size: 30px; margin-bottom: 14px; }
-  .login-left .left-desc { font-size: 12px; margin-bottom: 20px; }
-  .login-left .left-list li { font-size: 13px; gap: 8px; }
-  .login-right { padding: 20px 16px; }
-  .login-right .form-container { padding: 30px 22px; }
-  .login-right .form-title { font-size: 22px; }
-  .login-right .form-subtitle { font-size: 12px; }
-  .login-right label { font-size: 11px; margin-top: 12px; }
-}
-
-@media (max-width: 480px) {
-  .login-left { padding: 22px 14px; }
-  .login-left .brand-icon { padding: 6px; }
-  .login-left .left-title { font-size: 26px; }
-  .login-left .left-list { gap: 10px; }
-  .login-right { padding: 18px 12px; align-items: flex-start; }
-  .login-right .form-container { padding: 20px 16px; }
-  .login-right .form-title { font-size: 20px; }
-  .login-right .input-group { padding: 10px 12px; }
-  .login-right .input-group input { font-size: 16px; }
-  .login-right .btn { padding: 12px; font-size: 15px; }
-  .login-right .form-message { font-size: 13px; }
-}
-
-@media (max-width: 360px) {
-  .login-right .form-container { padding: 18px 14px; }
-  .login-right .input-group { padding: 9px 10px; }
-  .forgot-row .forgot-link { font-size: 11px; }
-}
-
 .login-page * {
   margin: 0;
   padding: 0;
@@ -147,6 +101,7 @@
 
 .login-right .form-container {
   width: 420px;
+  max-width: 100%;
   background: #FFFFFF;
   border: 1px solid #E2D7F3;
   border-radius: 18px;
@@ -282,4 +237,56 @@
 .forgot-row .forgot-link:hover {
   color: #5E4A94;
   text-decoration: underline;
+}
+
+/* =========================
+   RESPONSIVE (must come AFTER base styles to override)
+========================= */
+
+@media (max-width: 900px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+  .login-left { padding: 40px 20px; }
+  .login-right { padding: 30px 20px; }
+  .login-right .form-container { width: 100%; max-width: 100%; }
+  .login-left .left-title { font-size: 36px; }
+  .login-left .left-desc { font-size: 13px; max-width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .login-page { height: auto; }
+  .login-left { padding: 30px 16px; }
+  .login-left .brand { margin-bottom: 30px; }
+  .login-left .brand-icon { padding: 8px; }
+  .login-left .left-title { font-size: 30px; margin-bottom: 14px; }
+  .login-left .left-desc { font-size: 12px; margin-bottom: 20px; }
+  .login-left .left-list li { font-size: 13px; gap: 8px; }
+  .login-right { padding: 20px 16px; }
+  .login-right .form-container { padding: 30px 22px; }
+  .login-right .form-title { font-size: 22px; }
+  .login-right .form-subtitle { font-size: 12px; }
+  .login-right label { font-size: 11px; margin-top: 12px; }
+}
+
+@media (max-width: 480px) {
+  .login-left { padding: 22px 14px; }
+  .login-left .brand-icon { padding: 6px; }
+  .login-left .left-title { font-size: 26px; }
+  .login-left .left-list { gap: 10px; }
+  .login-right { padding: 18px 12px; align-items: flex-start; }
+  .login-right .form-container { padding: 20px 16px; }
+  .login-right .form-title { font-size: 20px; }
+  .login-right .input-group { padding: 10px 12px; }
+  .login-right .input-group input { font-size: 16px; }
+  .login-right .btn { padding: 12px; font-size: 15px; }
+  .login-right .form-message { font-size: 13px; }
+}
+
+@media (max-width: 360px) {
+  .login-right .form-container { padding: 18px 14px; }
+  .login-right .input-group { padding: 9px 10px; }
+  .forgot-row .forgot-link { font-size: 11px; }
 }

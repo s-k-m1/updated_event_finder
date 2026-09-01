@@ -15,51 +15,6 @@
   overflow-x: hidden;
 }
 
-@media (max-width: 900px) {
-  .signup-page {
-    grid-template-columns: 1fr;
-  }
-  .signup-left { padding: 40px 20px; }
-  .signup-right { padding: 30px 20px; }
-  .signup-right .form-container { width: 100%; max-width: 100%; }
-  .left-title { font-size: 36px; }
-  .left-desc { font-size: 13px; max-width: 100%; }
-}
-
-@media (max-width: 600px) {
-  .signup-page { height: auto; }
-  .signup-left { padding: 30px 16px; }
-  .brand { margin-bottom: 30px; }
-  .brand-icon { padding: 8px; }
-  .left-title { font-size: 30px; margin-bottom: 14px; }
-  .left-desc { font-size: 12px; margin-bottom: 20px; }
-  .left-list li { font-size: 13px; gap: 8px; }
-  .signup-right { padding: 20px 16px; }
-  .form-container { padding: 30px 22px; }
-  .form-title { font-size: 22px; }
-  .form-subtitle { font-size: 12px; }
-  label { font-size: 11px; margin-top: 12px; }
-}
-
-@media (max-width: 480px) {
-  .signup-left { padding: 22px 14px; }
-  .brand-icon { padding: 6px; }
-  .left-title { font-size: 26px; }
-  .left-list { gap: 10px; }
-  .signup-right { padding: 18px 12px; align-items: flex-start; }
-  .form-container { padding: 20px 16px; }
-  .form-title { font-size: 20px; }
-  .input-group { padding: 10px 12px; }
-  .input-group input { font-size: 16px; }
-  .btn { padding: 12px; font-size: 15px; }
-  .form-message { font-size: 13px; }
-}
-
-@media (max-width: 360px) {
-  .form-container { padding: 18px 14px; }
-  .input-group { padding: 9px 10px; }
-}
-
 /* =========================
    LEFT HERO SECTION
 ========================= */
@@ -144,6 +99,7 @@
 /* Form Container */
 .form-container {
   width: 420px;
+  max-width: 100%;
   background: #FFFFFF;
   border: 1px solid #E2D7F3;
   border-radius: 18px;
@@ -292,4 +248,55 @@ label {
 
 .login-link a:hover {
   text-decoration: underline;
+}
+
+/* =========================
+   RESPONSIVE (must come AFTER base styles to override)
+========================= */
+
+@media (max-width: 900px) {
+  .signup-page {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+  .signup-left { padding: 40px 20px; }
+  .signup-right { padding: 30px 20px; }
+  .signup-right .form-container { width: 100%; max-width: 100%; }
+  .left-title { font-size: 36px; }
+  .left-desc { font-size: 13px; max-width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .signup-page { height: auto; }
+  .signup-left { padding: 30px 16px; }
+  .brand { margin-bottom: 30px; }
+  .brand-icon { padding: 8px; }
+  .left-title { font-size: 30px; margin-bottom: 14px; }
+  .left-desc { font-size: 12px; margin-bottom: 20px; }
+  .left-list li { font-size: 13px; gap: 8px; }
+  .signup-right { padding: 20px 16px; }
+  .form-container { padding: 30px 22px; }
+  .form-title { font-size: 22px; }
+  .form-subtitle { font-size: 12px; }
+  label { font-size: 11px; margin-top: 12px; }
+}
+
+@media (max-width: 480px) {
+  .signup-left { padding: 22px 14px; }
+  .brand-icon { padding: 6px; }
+  .left-title { font-size: 26px; }
+  .left-list { gap: 10px; }
+  .signup-right { padding: 18px 12px; align-items: flex-start; }
+  .form-container { padding: 20px 16px; }
+  .form-title { font-size: 20px; }
+  .input-group { padding: 10px 12px; }
+  .input-group input { font-size: 16px; }
+  .btn { padding: 12px; font-size: 15px; }
+  .form-message { font-size: 13px; }
+}
+
+@media (max-width: 360px) {
+  .form-container { padding: 18px 14px; }
+  .input-group { padding: 9px 10px; }
 }
