@@ -1,0 +1,462 @@
+.cta-section {
+
+    background:#F9F6FD;
+
+    padding:80px 0;
+
+}
+
+
+
+.cta-container {
+
+    max-width:1510px;
+
+    margin:auto;
+
+    padding:0 20px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+/* Main Card */
+
+.cta-card {
+
+
+    width:100%;
+
+    max-width:920px;
+
+    min-height:420px;
+
+
+    border-radius:22px;
+
+
+    background:linear-gradient(
+        110deg,
+        #6250A0,
+        #8A6FC4
+    );
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    text-align:center;
+
+
+    color:white;
+
+
+}
+
+
+
+
+/* Badge */
+
+
+.cta-badge {
+
+
+    background:#F0C26B;
+
+
+    color:#2D2440;
+
+
+    padding:7px 18px;
+
+
+    border-radius:20px;
+
+
+    font-size:13px;
+
+
+    font-weight:700;
+
+
+    margin-bottom:22px;
+
+
+}
+
+
+
+
+/* Heading */
+
+
+.cta-card h2 {
+
+
+    margin:0;
+
+
+    font-family:"Plus Jakarta Sans",sans-serif;
+
+
+    font-size:42px;
+
+
+    font-weight:800;
+
+
+    line-height:1.2;
+
+
+}
+
+
+
+
+
+/* Description */
+
+
+.cta-card p {
+
+
+    margin:20px 0 40px;
+
+
+    font-family:"Plus Jakarta Sans",sans-serif;
+
+
+    font-size:20px;
+
+
+    line-height:1.5;
+
+
+    color:#EEE8F8;
+
+
+}
+
+
+
+
+
+/* Buttons */
+
+
+.cta-buttons {
+
+
+    display:flex;
+
+
+    gap:16px;
+
+
+    align-items:center;
+
+
+}
+
+
+
+
+.cta-buttons button {
+
+
+    height:58px;
+
+
+    padding:0 32px;
+
+
+    border-radius:16px;
+
+
+    font-family:"Plus Jakarta Sans",sans-serif;
+
+
+    font-size:16px;
+
+
+    font-weight:700;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:10px;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+/* Browse */
+
+
+.browse-btn {
+
+
+    background:white;
+
+
+    border:none;
+
+
+    color:#8A6FC4;
+
+
+}
+
+
+
+.browse-btn svg {
+
+
+    width:20px;
+
+
+}
+
+
+
+
+
+.browse-btn:hover {
+
+
+    transform:translateY(-3px);
+
+
+    background:#F5F0FC;
+
+
+}
+
+
+
+
+
+/* Create */
+
+
+.create-btn {
+
+
+    background:transparent;
+
+
+    border:2px solid rgba(255,255,255,.35);
+
+
+    color:white;
+
+
+}
+
+
+
+.create-btn svg {
+
+
+    width:18px;
+
+
+}
+
+
+
+.create-btn:hover {
+
+
+    background:white;
+
+
+    color:#8A6FC4;
+
+
+    border-color:white;
+
+
+    transform:translateY(-3px);
+
+
+}
+
+
+
+
+
+/* Responsive */
+
+
+@media(max-width:900px){
+
+
+    .cta-card {
+
+
+        width:100%;
+
+        padding:40px 20px;
+
+
+    }
+
+
+    .cta-card h2 {
+
+
+        font-size:34px;
+
+
+    }
+
+
+    .cta-card p {
+
+
+        font-size:17px;
+
+
+    }
+
+
+}
+
+
+
+
+@media(max-width:600px){
+
+
+    .cta-buttons {
+
+
+        flex-direction:column;
+
+        width:100%;
+
+
+    }
+
+
+    .cta-buttons button {
+
+
+        width:100%;
+
+
+    }
+
+
+}
+
+
+
+@media(max-width:768px){
+
+
+    .cta-section {
+
+        padding:60px 0;
+
+    }
+
+
+    .cta-card h2 {
+
+        font-size:30px;
+
+    }
+
+
+    .cta-card p {
+
+        font-size:16px;
+
+    }
+
+
+}
+
+
+
+@media(max-width:480px){
+
+
+    .cta-card {
+
+        padding:35px 16px;
+
+        min-height:0;
+
+    }
+
+
+    .cta-card h2 {
+
+        font-size:26px;
+
+    }
+
+
+    .cta-card p {
+
+        margin:16px 0 30px;
+
+    }
+
+
+}
+
+
+
+@media(max-width:380px){
+
+
+    .cta-buttons button {
+
+        height:54px;
+
+        padding:0 20px;
+
+        font-size:15px;
+
+    }
+
+
+    .cta-badge {
+
+        font-size:12px;
+
+    }
+
+
+}

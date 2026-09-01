@@ -1,0 +1,97 @@
+-- Local Event Finder — Database Schema
+
+CREATE TABLE IF NOT EXISTS categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    slug VARCHAR(60) NOT NULL UNIQUE,
+    icon_name VARCHAR(50) NOT NULL,
+    bg_color VARCHAR(20) NOT NULL,
+    event_count INTEGER NOT NULL DEFAULT 0,
+    description TEXT,
+    image_url TEXT,
+    is_featured BOOLEAN NOT NULL DEFAULT FALSE,
+    sort_order INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS events (
+    id SERIAL PRIMARY KEY,
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    title VARCHAR(255) NOT NULL,
+    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+    rating NUMERIC(3,1) NOT NULL DEFAULT 0,
+    price VARCHAR(50) NOT NULL DEFAULT 'Free',
+    price_value NUMERIC(10,2) DEFAULT 0,
+    event_date VARCHAR(80) NOT NULL,
+    event_time VARCHAR(80) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    city VARCHAR(80) NOT NULL DEFAULT '',
+    lat NUMERIC(9,6),
+    lng NUMERIC(9,6),
+    badge VARCHAR(50) NOT NULL DEFAULT '',
+    image_url TEXT NOT NULL,
+    description TEXT,
+    attendees INTEGER NOT NULL DEFAULT 0,
+    is_featured BOOLEAN NOT NULL DEFAULT FALSE,
+    is_trending BOOLEAN NOT NULL DEFAULT FALSE,
+    is_live BOOLEAN NOT NULL DEFAULT FALSE,
+    live_ago VARCHAR(50) DEFAULT '',
+    organizer VARCHAR(255) DEFAULT '',
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(120) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(40) NOT NULL DEFAULT '',
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin')),
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS registrations (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+    payment_method VARCHAR(20) DEFAULT NULL,
+    payment_status VARCHAR(20) DEFAULT 'pending',
+    khalti_pidx VARCHAR(120) DEFAULT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    UNIQUE (user_id, event_id)
+);
+
+CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS site_content (
+    key VARCHAR(80) PRIMARY KEY,
+    value JSONB NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS saved_events (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    PRIMARY KEY (user_id, event_id)
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    is_read BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS password_resets (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE REFERENCES users(email) ON DELETE CASCADE,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);

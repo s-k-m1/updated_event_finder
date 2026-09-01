@@ -1,0 +1,239 @@
+.explore-category{
+
+    background:#EEE8F8;
+
+    border-bottom:1px solid #E1D2F5;
+
+    padding:60px 0 62px;
+
+}
+
+
+.explore-container{
+
+    max-width:1510px;
+
+    margin:auto;
+
+    padding:0 20px;
+
+}
+
+
+/* Label */
+
+.explore-label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#8A6FC4;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    margin-bottom:18px;
+
+}
+
+
+.explore-label span{
+
+    width:30px;
+
+    height:2px;
+
+    background:#8A6FC4;
+
+}
+
+
+
+/* Heading */
+
+
+.explore-container h1{
+
+    margin:0;
+
+    font-family:'Plus Jakarta Sans',sans-serif;
+
+    font-size:44px;
+
+    line-height:1.2;
+
+    font-weight:800;
+
+    color:#2D2440;
+
+    margin-bottom:8px;
+
+}
+
+
+/* Description */
+
+
+.explore-container p{
+
+    margin:0;
+
+    color:#8A6FC4;
+
+    font-size:20px;
+
+    font-weight:400;
+
+    margin-bottom:32px;
+
+}
+
+
+
+/* Search */
+
+
+.category-search{
+
+    width:560px;
+
+    height:56px;
+
+    background:white;
+
+    border:1px solid #E1D2F5;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 18px;
+
+    box-shadow:0 2px 6px rgba(138,111,196,0.12);
+
+}
+
+
+.category-search svg{
+
+    width:22px;
+
+    height:22px;
+
+    color:#8A6FC4;
+
+}
+
+
+.category-search input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    font-family:'Plus Jakarta Sans',sans-serif;
+
+    font-size:16px;
+
+    color:#2D2440;
+
+}
+
+
+.category-search input::placeholder{
+
+    color:#8A6FC4;
+
+}
+
+
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .explore-container h1{
+
+        font-size:34px;
+
+    }
+
+
+    .explore-container p{
+
+        font-size:16px;
+
+    }
+
+
+    .category-search{
+
+        width:100%;
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .explore-category{
+
+        padding:40px 0;
+
+    }
+
+
+    .explore-container h1{
+
+        font-size:30px;
+
+    }
+
+
+    .explore-container p{
+
+        font-size:16px;
+
+        margin-bottom:24px;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .explore-category{
+
+        padding:32px 0;
+
+    }
+
+
+    .explore-container h1{
+
+        font-size:26px;
+
+    }
+
+
+    .explore-container p{
+
+        font-size:15px;
+
+    }
+
+}

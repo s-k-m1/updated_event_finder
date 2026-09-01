@@ -1,0 +1,240 @@
+.about-hero {
+
+    background:#EEE8F8;
+
+    padding:85px 0 90px;
+
+}
+
+
+
+.about-container {
+
+    max-width:1510px;
+
+    margin:auto;
+
+    padding:0 40px;
+
+}
+
+
+
+/* Label */
+
+.about-label {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#8A6FC4;
+
+    font-family:"Plus Jakarta Sans", sans-serif;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.about-label span {
+
+    width:30px;
+
+    height:2px;
+
+    background:#8A6FC4;
+
+}
+
+
+
+/* Heading */
+
+
+.about-container h1 {
+
+    margin:0;
+
+    color:#2D2440;
+
+    font-family:"Plus Jakarta Sans", sans-serif;
+
+    font-size:78px;
+
+    line-height:1.18;
+
+    font-weight:800;
+
+    letter-spacing:-2px;
+
+}
+
+
+
+.about-container h1 span {
+
+    color:#8A6FC4;
+
+}
+
+
+
+/* Paragraph */
+
+
+.about-container p {
+
+    margin-top:25px;
+
+    color:#765CA8;
+
+    font-family:"Plus Jakarta Sans", sans-serif;
+
+    font-size:24px;
+
+    line-height:1.55;
+
+    font-weight:400;
+
+}
+
+
+
+/* Responsive */
+
+
+@media(max-width:900px){
+
+
+    .about-container {
+
+        padding:0 25px;
+
+    }
+
+
+    .about-container h1 {
+
+        font-size:55px;
+
+    }
+
+
+    .about-container p {
+
+        font-size:20px;
+
+    }
+
+
+}
+
+
+
+@media(max-width:768px){
+
+
+    .about-hero {
+
+        padding:60px 0 65px;
+
+    }
+
+
+    .about-container h1 {
+
+        font-size:46px;
+
+    }
+
+
+    .about-container p {
+
+        font-size:18px;
+
+    }
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+    .about-container h1 {
+
+        font-size:42px;
+
+    }
+
+
+    .about-container p br {
+
+        display:none;
+
+    }
+
+
+}
+
+
+
+@media(max-width:480px){
+
+
+    .about-container {
+
+        padding:0 20px;
+
+    }
+
+
+    .about-container h1 {
+
+        font-size:36px;
+
+    }
+
+
+    .about-container p {
+
+        font-size:17px;
+
+    }
+
+
+}
+
+
+
+@media(max-width:380px){
+
+
+    .about-container h1 {
+
+        font-size:32px;
+
+    }
+
+
+    .about-label {
+
+        font-size:13px;
+
+        letter-spacing:1.5px;
+
+    }
+
+
+}

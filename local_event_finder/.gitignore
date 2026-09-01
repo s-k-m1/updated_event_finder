@@ -1,0 +1,24 @@
+# Node
+node_modules/
+
+# Build
+frontend/local-event-finder/dist/
+frontend/local-event-finder/.vite/
+
+# Local PostgreSQL cluster (never commit)
+backend/pgdata/
+
+# Logs
+logs/
+*.log
+
+# Env
+.env
+.env.local
+.env.production
+
+# OS
+.DS_Store
+
+# Render blueprint is committed; keep lockfiles
+# backend/package-lock.json
