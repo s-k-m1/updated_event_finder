@@ -15,17 +15,18 @@ const buildTransporter = () => {
 let transporter = buildTransporter();
 
 export const Mailer = {
-  async send({ to, subject, html }) {
+  async send({ to, subject, html, text = "" }) {
     if (!config.smtp.host || !transporter) {
       console.warn("SMTP_HOST not set — skipping email send to", to);
       return { skipped: true };
     }
     try {
       const info = await transporter.sendMail({
-        from: config.smtp.from,
+        from: { name: "LocalEvent Finder", address: config.smtp.from },
         to,
         subject,
         html,
+        text,
       });
       console.log(`Email sent to ${to}: ${info.messageId}`);
       return info;
