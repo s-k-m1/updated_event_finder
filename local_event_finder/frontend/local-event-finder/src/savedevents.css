@@ -341,3 +341,26 @@
     padding:4px 10px;
     white-space:nowrap;
 }
+
+.reg-status-chip{
+    font-size:11px;
+    font-weight:700;
+    border-radius:20px;
+    padding:4px 10px;
+    white-space:nowrap;
+}
+
+.reg-status-chip.accepted{
+    color:#1E7A3C;
+    background:#E2F6EA;
+}
+
+.reg-status-chip.pending{
+    color:#B85C1B;
+    background:#FFF0E1;
+}
+
+.reg-status-chip.declined{
+    color:#B3261E;
+    background:#FDEBEC;
+}

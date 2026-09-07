@@ -35,7 +35,12 @@ export default function PaymentReturn() {
       .then((res) => {
         if (done) return;
         if (res && res.confirmed) {
-          setState({ loading: false, kind: "success", status: "Completed", message: "Payment received! You're registered for this event." });
+          setState({
+            loading: false,
+            kind: "success",
+            status: "Completed",
+            message: "Payment successful! Your registration has been submitted.",
+          });
           return;
         }
         const s = res?.status || urlStatus || "Pending";
@@ -68,7 +73,17 @@ export default function PaymentReturn() {
     };
   }, [pidx, urlStatus]);
 
-  const goDashboard = () => navigate("/dashboard");
+  // Staying authenticated: users return here straight from the Khalti page.
+  // A successful payment redirects them to My Registrations so they see the
+  // updated registration right away.
+  useEffect(() => {
+    if (!state.loading && state.kind === "success") {
+      const t = setTimeout(() => navigate("/registrations", { replace: true }), 1200);
+      return () => clearTimeout(t);
+    }
+  }, [state.loading, state.kind, navigate]);
+
+  const goRegistrations = () => navigate("/registrations");
   const goEvent = () => navigate("/event");
 
   const icon = state.loading ? (
@@ -99,8 +114,8 @@ export default function PaymentReturn() {
           <p className="pr-status">{state.status}</p>
           <p className="pr-msg">{state.message}</p>
           <div className="pr-actions">
-            <button className="pr-btn pr-btn-primary" onClick={goDashboard}>
-              Go to Dashboard
+            <button className="pr-btn pr-btn-primary" onClick={goRegistrations}>
+              Go to My Registrations
             </button>
             <button className="pr-btn" onClick={goEvent}>
               Browse Events

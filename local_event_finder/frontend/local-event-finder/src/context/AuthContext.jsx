@@ -15,10 +15,22 @@ export const AuthProvider = ({ children }) => {
         setUser(me);
         localStorage.setItem("user", JSON.stringify(me));
       })
-      .catch(() => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        setToken(null);
+      .catch((err) => {
+        // Only log out on a genuine auth failure (401). On transient errors
+        // (network/5xx) keep the stored token and cached user so the user is
+        // not unnecessarily logged out — e.g. when returning from a payment.
+        if (err && err.status === 401) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          setToken(null);
+        } else {
+          try {
+            const cached = localStorage.getItem("user");
+            setUser(cached ? JSON.parse(cached) : null);
+          } catch {
+            setUser(null);
+          }
+        }
       })
       .finally(() => setLoading(false));
   }, [token]);

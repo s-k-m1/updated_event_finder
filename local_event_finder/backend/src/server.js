@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { app } from "./app.js";
 import { config } from "./config.js";
-import { ensureDatabase, createAdminIfMissing } from "./scripts/bootstrapDb.js";
+import { ensureDatabase, createAdminIfMissing, migrate } from "./scripts/bootstrapDb.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const frontendDist = path.resolve(
@@ -22,6 +22,7 @@ if (fs.existsSync(frontendDist)) {
 const started = (async () => {
   try {
     const { initialized } = await ensureDatabase();
+    await migrate();
     if (initialized) {
       const adminCreated = await createAdminIfMissing();
       console.log(

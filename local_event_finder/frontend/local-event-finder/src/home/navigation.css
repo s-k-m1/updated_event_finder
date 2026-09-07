@@ -236,6 +236,23 @@ color:#8A6FC4;
   color: #9A8FB0;
 }
 
+.notif-see-all {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  margin-top: 6px;
+  border-top: 1px solid #F0EAF8;
+  color: #8A6FC4;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.notif-see-all:hover {
+  background: #F4EEFB;
+}
+
 .nav-dropdown-user {
   padding: 10px;
   border-bottom: 1px solid #F0EAF8;

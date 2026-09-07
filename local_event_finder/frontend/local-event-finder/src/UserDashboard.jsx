@@ -33,7 +33,7 @@ export default function UserDashboard() {
   const cards = [
     { label: "My Registrations", value: registrations.length, icon: Ticket, to: "/registrations", color: "#8A6FC4" },
     { label: "Saved Events", value: saved.length, icon: Heart, to: "/saved", color: "#C0457B" },
-    { label: "Unread Notifications", value: unread, icon: Bell, to: "#", color: "#E0863B" },
+    { label: "Unread Notifications", value: unread, icon: Bell, to: "/notifications", color: "#E0863B" },
   ];
 
   return (
@@ -95,7 +95,13 @@ export default function UserDashboard() {
                             <strong>{e.title}</strong>
                             <span><CalendarDays size={12} /> {e.date} · <Clock size={12} /> {e.time}</span>
                             <em className={e.paymentStatus === "paid" ? "paid" : "pending"}>
-                              {Number(e.price_value) <= 0 ? "Registered ✓" : e.paymentStatus === "paid" ? "Paid ✓" : "Payment pending"}
+                              {e.registrationStatus === "declined"
+                                ? "Declined"
+                                : e.registrationStatus === "accepted"
+                                ? (Number(e.price_value) <= 0 ? "Registered ✓" : "Approved ✓")
+                                : e.paymentStatus === "paid"
+                                ? "Pending approval"
+                                : "Payment pending"}
                             </em>
                           </div>
                         </Link>

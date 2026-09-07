@@ -54,8 +54,10 @@ export default function MyRegistrations() {
                   <img src={event.image} alt={event.title} />
                   {event.badge && <span className="badge">{event.badge}</span>}
                   <span className={`registered-chip ${event.paymentStatus === "pending" && Number(event.price_value) > 0 ? "pending" : ""}`}>
-                    {Number(event.price_value) <= 0
-                      ? "Registered"
+                    {event.registrationStatus === "declined"
+                      ? "Declined"
+                      : event.registrationStatus === "accepted"
+                      ? (Number(event.price_value) <= 0 ? "Registered" : "Accepted ✓")
                       : event.paymentStatus === "paid"
                       ? "Paid ✓"
                       : "Payment pending"}
@@ -85,6 +87,9 @@ export default function MyRegistrations() {
                     <b>{event.price}</b>
                     <span className="pay-method-chip">
                       {event.paymentMethod === "khalti" ? "Khalti" : event.paymentMethod ? "Paid" : "Free"}
+                    </span>
+                    <span className={`reg-status-chip ${event.registrationStatus || "pending"}`}>
+                      {event.registrationStatus === "accepted" ? "Approved" : event.registrationStatus === "declined" ? "Declined" : "Pending approval"}
                     </span>
                     <Link to={`/event/${event.slug}`} className="view-details-link">
                       View Details

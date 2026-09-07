@@ -134,4 +134,37 @@ export const Mailer = {
       `,
     });
   },
+
+  async sendRegistrationAccepted(email, fullName, eventTitle) {
+    return this.send({
+      to: email,
+      subject: "Registration Accepted — LocalEvent Finder",
+      html: `
+        <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;padding:24px;border:1px solid #D9F0DC;border-radius:14px;background:#ffffff">
+          <h2 style="color:#2E7D32;margin:0 0 8px">Registration Accepted ✅</h2>
+          <p style="color:#6E6285;font-size:14px;line-height:1.6">
+            Hi ${fullName}, your registration for
+            <strong>"${eventTitle}"</strong> has been accepted. See you there!
+          </p>
+        </div>
+      `,
+    });
+  },
+
+  async sendRegistrationDeclined(email, fullName, eventTitle) {
+    return this.send({
+      to: email,
+      subject: "Registration Declined — LocalEvent Finder",
+      html: `
+        <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;padding:24px;border:1px solid #F5D5D4;border-radius:14px;background:#ffffff">
+          <h2 style="color:#B23B3B;margin:0 0 8px">Registration Declined</h2>
+          <p style="color:#6E6285;font-size:14px;line-height:1.6">
+            Hi ${fullName}, unfortunately your registration for
+            <strong>"${eventTitle}"</strong> has been declined. Please contact
+            support if you have any questions.
+          </p>
+        </div>
+      `,
+    });
+  },
 };

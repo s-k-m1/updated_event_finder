@@ -16,7 +16,9 @@ async function request(path, options = {}) {
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    throw new Error(data.error || `Request failed with status ${res.status}`);
+    const err = new Error(data.error || `Request failed with status ${res.status}`);
+    err.status = res.status;
+    throw err;
   }
   return data;
 }
@@ -95,6 +97,13 @@ export const adminSendNotification = (payload) => request("/admin/notifications"
 });
 export const adminGetSubscribers = () => request("/admin/subscribers");
 export const adminGetContent = () => request("/admin/content");
+
+export const adminGetRegistrations = () => request("/admin/registrations");
+export const adminSetRegistrationStatus = (id, status) =>
+  request(`/admin/registrations/${id}/status`, {
+    method: "PUT",
+    body: JSON.stringify({ status }),
+  });
 
 export const adminCreateEvent = (payload) => request("/events", {
   method: "POST",

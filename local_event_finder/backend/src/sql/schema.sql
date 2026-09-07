@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS registrations (
     event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
     payment_method VARCHAR(20) DEFAULT NULL,
     payment_status VARCHAR(20) DEFAULT 'pending',
+    registration_status VARCHAR(20) NOT NULL DEFAULT 'pending',
     khalti_pidx VARCHAR(120) DEFAULT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     UNIQUE (user_id, event_id)

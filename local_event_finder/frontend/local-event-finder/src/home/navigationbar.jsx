@@ -179,6 +179,11 @@ function Navigation() {
                   </div>
                 ))
               )}
+              {notifications.length > 0 && (
+                <Link to="/notifications" className="notif-see-all" onClick={() => setNotifOpen(false)}>
+                  See all notifications →
+                </Link>
+              )}
             </div>
           )}
         </div>

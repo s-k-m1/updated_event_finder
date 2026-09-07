@@ -8,6 +8,7 @@ const selectRegisteredEvent = `
            c.name AS category, c.slug AS category_slug,
            r.payment_method AS "paymentMethod",
            r.payment_status AS "paymentStatus",
+           r.registration_status AS "registrationStatus",
            r.created_at AS registered_at
     FROM registrations r
     JOIN events e ON e.id = r.event_id
@@ -48,7 +49,7 @@ export const RegistrationModel = {
 
   async findByUserAndEvent(userId, eventId) {
     const { rows } = await query(
-      "SELECT id, user_id, event_id, payment_method, payment_status, khalti_pidx FROM registrations WHERE user_id = $1 AND event_id = $2",
+      "SELECT id, user_id, event_id, payment_method, payment_status, registration_status, khalti_pidx FROM registrations WHERE user_id = $1 AND event_id = $2",
       [userId, eventId]
     );
     return rows[0] || null;
@@ -56,8 +57,8 @@ export const RegistrationModel = {
 
   async add(userId, eventId) {
     const { rows } = await query(
-      `INSERT INTO registrations (user_id, event_id, payment_status)
-       VALUES ($1, $2, 'paid')
+      `INSERT INTO registrations (user_id, event_id, payment_status, registration_status)
+       VALUES ($1, $2, 'paid', 'accepted')
        ON CONFLICT (user_id, event_id) DO NOTHING
        RETURNING id`,
       [userId, eventId]
@@ -67,12 +68,13 @@ export const RegistrationModel = {
 
   async addPending(userId, eventId, pidx) {
     const { rows } = await query(
-      `INSERT INTO registrations (user_id, event_id, payment_method, payment_status, khalti_pidx)
-       VALUES ($1, $2, 'khalti', 'pending', $3)
+      `INSERT INTO registrations (user_id, event_id, payment_method, payment_status, registration_status, khalti_pidx)
+       VALUES ($1, $2, 'khalti', 'pending', 'pending', $3)
        ON CONFLICT (user_id, event_id)
        DO UPDATE SET khalti_pidx = EXCLUDED.khalti_pidx,
                      payment_method = 'khalti',
-                     payment_status = 'pending'
+                     payment_status = 'pending',
+                     registration_status = 'pending'
        RETURNING id`,
       [userId, eventId, pidx]
     );
@@ -88,6 +90,46 @@ export const RegistrationModel = {
       [pidx]
     );
     return rows[0] || null;
+  },
+
+  async setRegistrationStatus(id, status) {
+    const { rows } = await query(
+      `UPDATE registrations
+       SET registration_status = $1
+       WHERE id = $2
+       RETURNING id, user_id, event_id, registration_status`,
+      [status, id]
+    );
+    return rows[0] || null;
+  },
+
+  async findById(id) {
+    const { rows } = await query("SELECT * FROM registrations WHERE id = $1", [id]);
+    return rows[0] || null;
+  },
+
+  // Admin listing of all registrations with user + event details.
+  async findAllAdmin(limit = 200, offset = 0) {
+    const { rows } = await query(
+      `SELECT r.id,
+              r.user_id AS "userId",
+              u.full_name AS "userName",
+              u.email AS "userEmail",
+              e.id AS "eventId",
+              e.title AS "eventTitle",
+              e.slug AS "eventSlug",
+              r.payment_method AS "paymentMethod",
+              r.payment_status AS "paymentStatus",
+              r.registration_status AS "registrationStatus",
+              r.created_at AS "registeredAt"
+       FROM registrations r
+       JOIN users u ON u.id = r.user_id
+       JOIN events e ON e.id = r.event_id
+       ORDER BY r.created_at DESC
+       LIMIT $1 OFFSET $2`,
+      [limit, offset]
+    );
+    return rows;
   },
 
   async remove(userId, eventId) {

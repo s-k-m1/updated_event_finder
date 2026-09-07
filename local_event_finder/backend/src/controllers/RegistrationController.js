@@ -52,6 +52,7 @@ export const RegistrationController = {
       res.json({
         registered: !!row,
         paymentStatus: row?.payment_status || null,
+        registrationStatus: row?.registration_status || null,
         khaltiPidx: row?.khalti_pidx || null,
       });
     } catch (err) {
@@ -76,6 +77,7 @@ export const RegistrationController = {
           id: event.id,
           paymentMethod: null,
           paymentStatus: "paid",
+          registrationStatus: "accepted",
         });
       }
 
@@ -164,6 +166,61 @@ export const RegistrationController = {
       if (!event) return res.status(404).json({ error: "Event not found" });
       await RegistrationModel.remove(req.user.id, event.id);
       res.json({ registered: false, id: event.id });
+    } catch (err) {
+      next(err);
+    }
+  }
+};
+
+async function notifyAdminDecision(userId, eventTitle, status) {
+  const accepted = status === "accepted";
+  const title = accepted ? "Registration accepted" : "Registration declined";
+  const message = `Your registration for ${eventTitle} has been ${accepted ? "accepted" : "declined"}.`;
+  await NotificationModel.create(userId, title, message);
+  const user = await UserModel.findById(userId);
+  if (user?.email) {
+    try {
+      if (accepted) {
+        await Mailer.sendRegistrationAccepted(user.email, user.full_name || "there", eventTitle);
+      } else {
+        await Mailer.sendRegistrationDeclined(user.email, user.full_name || "there", eventTitle);
+      }
+    } catch (err) {
+      console.error("Failed to send admin decision email:", err.message);
+    }
+  }
+}
+
+export const RegistrationAdminController = {
+  async list(req, res, next) {
+    try {
+      res.json({ registrations: await RegistrationModel.findAllAdmin() });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async setStatus(req, res, next) {
+    try {
+      const { status } = req.body || {};
+      if (!["accepted", "declined"].includes(status)) {
+        return res.status(400).json({ error: 'Status must be "accepted" or "declined"' });
+      }
+
+      const registration = await RegistrationModel.findById(req.params.id);
+      if (!registration) return res.status(404).json({ error: "Registration not found" });
+
+      const updated = await RegistrationModel.setRegistrationStatus(registration.id, status);
+      const event = await EventModel.findById(registration.event_id);
+      if (event) {
+        await notifyAdminDecision(registration.user_id, event.title, status);
+      }
+
+      return res.json({
+        id: updated.id,
+        registrationStatus: updated.registration_status,
+        message: `Registration ${status === "accepted" ? "accepted" : "declined"}.`,
+      });
     } catch (err) {
       next(err);
     }

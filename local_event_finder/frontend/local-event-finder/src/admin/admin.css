@@ -389,6 +389,110 @@
   font-size: 14px;
 }
 
+.admin-user-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.admin-user-cell strong {
+  color: #2B2238;
+}
+
+.admin-user-cell span {
+  font-size: 12px;
+  color: #9A8FB0;
+}
+
+.pay-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #F0EAF8;
+  color: #5E4A94;
+  text-transform: capitalize;
+}
+
+.pay-chip.paid {
+  background: #E2F6EA;
+  color: #1E7A3C;
+}
+
+.pay-chip.pending {
+  background: #FFF0E1;
+  color: #B85C1B;
+}
+
+.reg-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.reg-chip.reg-accepted {
+  background: #E2F6EA;
+  color: #1E7A3C;
+}
+
+.reg-chip.reg-pending {
+  background: #FFF0E1;
+  color: #B85C1B;
+}
+
+.reg-chip.reg-declined {
+  background: #FDEBEC;
+  color: #B3261E;
+}
+
+.admin-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 34, 56, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 20px;
+}
+
+.admin-confirm-dialog {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(43, 34, 56, 0.3);
+}
+
+.admin-confirm-icon {
+  color: #B3261E;
+  margin-bottom: 12px;
+}
+
+.admin-confirm-dialog h3 {
+  margin: 0 0 10px;
+  color: #2B2238;
+  font-size: 18px;
+}
+
+.admin-confirm-dialog p {
+  color: #6E6285;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.admin-confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
 /* =========================
    FORM
 ========================= */

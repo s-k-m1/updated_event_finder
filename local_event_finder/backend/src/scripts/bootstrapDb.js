@@ -22,6 +22,15 @@ export async function ensureDatabase() {
   return { initialized: true };
 }
 
+// Idempotent migrations for pre-existing databases. These only add missing
+// columns/constraints and never drop or recreate existing tables/data.
+export async function migrate() {
+  await query(
+    `ALTER TABLE registrations
+     ADD COLUMN IF NOT EXISTS registration_status VARCHAR(20) NOT NULL DEFAULT 'pending'`
+  );
+}
+
 export async function createAdminIfMissing() {
   const { rows } = await query("SELECT COUNT(*)::int AS count FROM users WHERE role = 'admin'");
   if (rows[0].count > 0) return false;

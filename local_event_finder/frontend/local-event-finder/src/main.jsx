@@ -15,12 +15,14 @@ import ResetPassword from './ResetPassword.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import Saved from './saved.jsx';
 import MyRegistrations from './MyRegistrations.jsx';
+import Notifications from './Notifications.jsx';
 import UserDashboard from './UserDashboard.jsx';
 import PaymentReturn from './PaymentReturn.jsx';
 import CreateEvent from './CreateEvent.jsx';
 import AdminLayout from './admin/AdminLayout.jsx';
 import AdminDashboard from './admin/AdminDashboard.jsx';
 import AdminEvents from './admin/AdminEvents.jsx';
+import AdminRegistrations from './admin/AdminRegistrations.jsx';
 import AdminCategories from './admin/AdminCategories.jsx';
 import AdminUsers from './admin/AdminUsers.jsx';
 import AdminSubscribers from './admin/AdminSubscribers.jsx';
@@ -82,6 +84,14 @@ element:<Signup />,
   ),
 },
 {
+  path: "/notifications",
+  element: (
+    <ProtectedRoute>
+      <Notifications />
+    </ProtectedRoute>
+  ),
+},
+{
   path: "/dashboard",
   element: (
     <ProtectedRoute>
@@ -115,6 +125,7 @@ element:<Signup />,
   children: [
     { index: true, element: <AdminDashboard /> },
     { path: "events", element: <AdminEvents /> },
+    { path: "registrations", element: <AdminRegistrations /> },
     { path: "categories", element: <AdminCategories /> },
     { path: "users", element: <AdminUsers /> },
     { path: "subscribers", element: <AdminSubscribers /> },

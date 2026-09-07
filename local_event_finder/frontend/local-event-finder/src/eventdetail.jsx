@@ -21,6 +21,11 @@ export default function EventDetail() {
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [paying, setPaying] = useState(false);
 
+  const applyStatus = (d) => {
+    setRegistered(d.registered && d.registrationStatus !== "declined");
+    setPaymentPending(d.registered && d.paymentStatus === "pending" && d.registrationStatus !== "declined");
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setEvent(null);
@@ -34,8 +39,7 @@ export default function EventDetail() {
             .catch(() => {});
           getRegistrationStatus(slug)
             .then((d) => {
-              setRegistered(d.registered);
-              setPaymentPending(d.registered && d.paymentStatus === "pending");
+              applyStatus(d);
             })
             .catch(() => {});
         }
@@ -51,8 +55,7 @@ export default function EventDetail() {
         .catch(() => {});
       getRegistrationStatus(slug)
         .then((d) => {
-          setRegistered(d.registered);
-          setPaymentPending(d.registered && d.paymentStatus === "pending");
+          applyStatus(d);
         })
         .catch(() => {});
     } else if (!user) {

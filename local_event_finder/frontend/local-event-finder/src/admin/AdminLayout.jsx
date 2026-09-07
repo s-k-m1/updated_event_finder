@@ -3,6 +3,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   CalendarDays,
+  Ticket,
   FolderTree,
   Users,
   Mail,
@@ -16,6 +17,7 @@ import "./admin.css";
 const navItems = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/events", label: "Events", icon: CalendarDays },
+  { to: "/admin/registrations", label: "Registrations", icon: Ticket },
   { to: "/admin/categories", label: "Categories", icon: FolderTree },
   { to: "/admin/users", label: "Users", icon: Users },
   { to: "/admin/subscribers", label: "Subscribers", icon: Mail },

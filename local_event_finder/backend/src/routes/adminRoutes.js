@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { DashboardController, UserAdminController } from "../controllers/ContentController.js";
 import { NotificationAdminController } from "../controllers/NotificationController.js";
+import { RegistrationAdminController } from "../controllers/RegistrationController.js";
 import { authenticate, requireRole } from "../middlewares/auth.js";
 
 const router = Router();
@@ -14,6 +15,9 @@ router.get("/content", DashboardController.content);
 
 router.get("/notifications", NotificationAdminController.list);
 router.post("/notifications", NotificationAdminController.send);
+
+router.get("/registrations", RegistrationAdminController.list);
+router.put("/registrations/:id/status", RegistrationAdminController.setStatus);
 
 router.put("/users/:id/role", UserAdminController.updateRole);
 router.put("/users/:id", UserAdminController.update);
